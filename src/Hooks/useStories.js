@@ -5,17 +5,24 @@ export default function useStories() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [stories, setStories] = useState([]);
+  const [pages, setPages] = useState(0);
 
   useEffect(async () => {
-    try {
-      const result = await axios('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty',);
-      setStories(result.data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
+    async function fetchData() {
+      try {
+        const result = await axios('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty',);
+        const pagesResult = Math.ceil(result.data / 5);
+        setStories(result.data);
+        setPages(pagesResult);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
   }, []);
 
-  return { error, loading, stories };
+  return { error, loading, stories, pages };
 }
