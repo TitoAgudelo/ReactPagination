@@ -22,7 +22,11 @@ const TableBodyComponent = () => {
         }
       ) : '' }
       { 
-        pagination && totalPage ? <Pagination current={pagination} onChange={onChange} total={totalPage} /> : ''
+        pagination && totalPage ? (
+          <div className="pagination">
+            <Pagination defaultPageSize={5} showSizeChanger={false} current={pagination} onChange={onChange} total={totalPage} /> 
+          </div>
+        ): ''
       }
     </Layout>
   );

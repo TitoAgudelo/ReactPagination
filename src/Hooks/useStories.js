@@ -11,7 +11,8 @@ export default function useStories() {
     async function fetchData() {
       try {
         const result = await axios('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty',);
-        const pagesResult = Math.ceil(result.data / 5);
+        const resultLength = result.data.length;
+        const pagesResult = Math.ceil(resultLength / 5);
         setStories(result.data);
         setPages(pagesResult);
       } catch (error) {

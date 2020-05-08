@@ -9,7 +9,7 @@ const { Text } = Typography;
 const StoryComponent = ({ storyId }) => {
   const { currentStory } = useStoryData(storyId);
 
-  return currentStory && (
+  return (currentStory && currentStory.id === storyId) ? (
     <Row justify="center" style={{ padding: '1rem 0', borderBottom: '1px solid rgb(217, 222, 230)' }}>
       <Col span={2}>
         <Text style={{ color: '#2a13bd', padding: '0 1rem', display: 'flex' }}>{currentStory.by}</Text>
@@ -30,7 +30,7 @@ const StoryComponent = ({ storyId }) => {
         <Text style={{ color: '#2a13bd', padding: '0 1rem', display: 'flex' }}>{currentStory.url}</Text>
       </Col>
     </Row>
-  );
+  ) : '';
 }
 
 export default StoryComponent;
